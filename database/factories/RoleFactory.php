@@ -17,7 +17,9 @@ class RoleFactory extends Factory
     public function definition()
     {
         return [
-            //
+            ["name" => 'Super Admin'],
+            ["name" => 'Admin'],
+            ["name" => 'User'],
         ];
     }
 }
