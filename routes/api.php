@@ -26,9 +26,10 @@ Route::get('/album', [AlbumController::class, 'show']);
  * Admin gallery
  */
 Route::get('/admin/gallery', [AdminGalleryController::class, 'show']);
-Route::get('/admin/gallery/album/{id}', [AdminGalleryController::class, 'getPictures'])->middleware('auth:sanctum');
+Route::get('/admin/gallery/album/{id}', [AlbumController::class, 'view'])->middleware('auth:sanctum');
 Route::post('/admin/gallery/upload/', [AdminGalleryController::class, 'uploadPictures'])->withoutMiddleware('api');
 Route::post('/admin/gallery/create/', [AdminGalleryController::class, 'createAlbum']);
+Route::delete('/admin/gallery/picture/{id}', [AdminGalleryController::class, 'deletePicture'])->middleware('auth:sanctum');
 
 /**
  * User
@@ -40,3 +41,8 @@ Route::get('/user', [UserController::class, 'getUserDiver']);
  */
 Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
+Route::get('/auth/token', [AuthController::class, 'auth'])->middleware('auth:sanctum');
+
+// Route::middleware('auth:sanctum')->get('/auth/token', function (Request $request) {
+//     return $request->user();
+// });
