@@ -3,15 +3,19 @@
         <div class="flex flex-col items-center">
 
             <form>
-            <h1>Create Album</h1>
-
-
-            <label for="">Nom de l'album</label>
-            <input type="text" v-model="name" placeholder="Nom de l'album"/>
-
-            <label for=""></label>
-
-            <button type="submit" @click.prevent="createAlbum()">Créer</button>
+                <div class="grid gap-6 mb-6 md:grid-cols-2">
+                    <div>
+                        <label for="album_name"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nom de
+                            l'album</label>
+                        <input type="text" id="album_name" v-model="name"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="John" required>
+                    </div>
+                </div>
+                <button type="submit" @click.prevent="createAlbum()"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Créer
+                    l'album</button>
             </form>
         </div>
     </Transition>
@@ -32,7 +36,7 @@ async function createAlbum() {
     formData.append('name', name.value)
 
 
-   const get = await $api.store('/api/admin/gallery/create', formData);
+    const get = await $api.store('/api/admin/gallery/create', formData);
 
     emit('albumcreated', true)
 
@@ -50,16 +54,16 @@ async function createAlbum() {
 }
 
 .slide-leave-active {
-    transition:  all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
 }
 
-.slide-enter-from{
+.slide-enter-from {
     transform: translateX(100%);
 
 }
+
 .slide-leave-to {
     transform: translateX(100%);
 
 }
-
 </style>
