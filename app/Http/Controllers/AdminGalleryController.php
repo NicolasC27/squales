@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Image;
+use App\Models\User;
 use App\Models\Album;
-use App\Models\Picture;
 
+use App\Models\Picture;
 use App\Models\AlbumPicture;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -36,9 +38,15 @@ class AdminGalleryController extends Controller
 
     public function getPictures(Request $request, int|string $params)
     {
-        $auth = Auth::user();
-        $db = $request->user()->currentAccessToken()->token;
-        dd($auth->currentAccessToken());
+
+        $role = $request->user()->role();
+        $user = $request->user();
+
+        if (!Gate::allows('album-view', $user)) {
+            dd('You are not allowed to update this post.');
+        } else {
+            dd('You are allowed to update this post.');
+        }
         $gallery = Album::where('folder', $params)->orWhere('id', $params)->first()->pictures->toArray();
 
 
@@ -93,5 +101,9 @@ class AdminGalleryController extends Controller
 
     public function deletePicture(Request $request)
     {
+        $picture = Picture::find($request->id);
+        $picture->delete();
+
+        return response()->json(['success' => true], 200);
     }
 }
