@@ -70,4 +70,15 @@ export default class Api {
       console.log(error);
     }
   }
+
+  public async delete<Result>(
+    endpoint: string,
+    params?: SearchParams
+  ): Promise<api.MetApiResponse> {
+    try {
+      return await $fetch(endpoint, this.fetchOptions(params, "DELETE"));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
