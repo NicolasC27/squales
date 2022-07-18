@@ -41,7 +41,7 @@ class Handler extends ExceptionHandler
                 return response()->json([
                     'status_code' => 401,
                     'success' => false,
-                    'message' => 'Unauthenticated.'
+                    'data' => ['message' => 'Unauthenticated.'],
                 ], 401);
             }
         });
