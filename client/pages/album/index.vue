@@ -11,9 +11,9 @@ definePageMeta({
 const { $api } = useNuxtApp();
 const album = ref<Album[]>();
 
-const get = async () => (album.value = (await $api.get<Album[]>("/api/album")).data);
+async () => (album.value = (await $api.get<Album[]>("/api/album")).data);
 
-get();
+
 
 </script>
 
