@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import get from "lodash/get";
+// import get from "lodash/get";
 import {
     ElIcon,
     ElButton,
@@ -17,7 +17,7 @@ import { Grape, IceCream, IceDrink, ArrowDown } from "@element-plus/icons-vue";
 import { ID_INJECTION_KEY } from 'element-plus'
 import GenderBadge from "./cells/GenderBadge.vue";
 import BaseButton from "./BaseButton.vue";
-import cloneDeep from "lodash/cloneDeep";
+// import cloneDeep from "lodash/cloneDeep";
 
 provide(ID_INJECTION_KEY, {
     prefix: 100,
@@ -32,7 +32,7 @@ const props = defineProps({
 });
 const { $api } = useNuxtApp()
 
-const datatable = cloneDeep(ref({}));
+const datatable = ref({});
 const data = ref({});
 
 const pagination = reactive({
@@ -117,7 +117,7 @@ refresh();
                                 </component>
                             </template>
                             <div v-else class="truncate">
-                                {{ get(row, column.prop) || '- -' }}
+                                <!-- {{ get(row, column.prop) || '- -' }} -->
                             </div>
                         </slot>
                     </template>

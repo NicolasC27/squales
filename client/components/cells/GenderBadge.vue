@@ -2,7 +2,7 @@
     <base-badge :color="badgeColor">{{ value }}</base-badge>
 </template>
 <script setup>
-import get from "lodash/get";
+// import get from "lodash/get";
 import BaseBadge from "../BaseBadge";
 
 const props = defineProps({
@@ -11,11 +11,11 @@ const props = defineProps({
 })
 
 const value = computed(() => {
-    const value = get(props.row, props.column.prop);
-    if (value === undefined) {
-        return "N/A";
-    }
-    return value;
+    // const value = get(props.row, props.column.prop);
+    // if (value === undefined) {
+    //     return "N/A";
+    // }
+    // return value;
 });
 
 const badgeColor = computed(() => {

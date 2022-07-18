@@ -35,8 +35,7 @@
     </div>
 </template>
 <script setup>
-import get from "lodash/get";
-import cloneDeep from "lodash/cloneDeep";
+// import { get } from "lodash";
 import { vLoading } from "element-plus";
 
 
@@ -53,10 +52,10 @@ const props = defineProps({
 const columns = ref([]);
 const scope = ref([]);
 
-function getColumnData(row, prop) {
+// function getColumnData(row, prop) {
 
-    return get(row, `${prop}`, "");
-}
+//     return get(row, `${prop}`, "");
+// }
 
 function addColumn(step) {
     const index = columns.value.length;
