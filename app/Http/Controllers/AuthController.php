@@ -33,7 +33,7 @@ class AuthController extends Controller
      * @param Request $request
      * @return user
      */
-    function loginUser(Request $request)
+    public function loginUser(Request $request)
     {
         try {
 
@@ -53,5 +53,11 @@ class AuthController extends Controller
             ], 200);
         } catch (Trowable $th) {
         }
+    }
+
+    public function auth(Request $request)
+    {
+
+        return response()->json(['status_code' => 200, 'success' => true, 'message' => 'Authenticated']);
     }
 }

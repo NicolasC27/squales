@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Abilities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -19,6 +20,6 @@ class Role extends Model
 
     public function abilities()
     {
-        return $this->hasMany(Ability::class);
+        return $this->belongsToMany(Abilities::class, 'role_abilities', 'role_id', 'ability_id');
     }
 }

@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { StorageSerializers, useStorage } from "@vueuse/core";
 
 export const authStore = defineStore("auth", {
   state: () => ({
@@ -40,10 +39,13 @@ export const authStore = defineStore("auth", {
     },
 
     async proceedSignIn(credentials) {
-      const authResult = await this.$nuxt.$api
+      return await this.$nuxt.$api
         .store("/api/auth/login", credentials)
         .then((response) => {
           this.token = response.user;
+          this.loggedIn = true;
+
+          return response;
         });
 
       //   if (authResult && authResult.success) {
@@ -54,6 +56,16 @@ export const authStore = defineStore("auth", {
       //   }
       // console.log("test");
       // return false;
+    },
+
+    authToken(token = null) {
+      return this.$nuxt.$api.get("/api/auth/token").then((response) => {
+        console.log(response);
+        if (response && response.success) return true;
+        else {
+          return false;
+        }
+      });
     },
 
     getUser() {
