@@ -1,9 +1,13 @@
 <template>
     <Transition name="slide">
         <div class="flex flex-col">
-
-
-            <DropZone class="flex w-full justify-center" @files-dropped="addFiles"
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
+                <label for="small-input" class="block mb-2 text-sm font-medium text-gray-900">
+                    Nom de l'album</label>
+                <input type="text" id="small-input" v-model="folderName"
+                    class="block p-2 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-xs focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <DropZone class=" flex w-full justify-center" @files-dropped="addFiles"
                 :class="{ 'cursor-not-allowed opacity-50': loadingFiles.finished }" #default="{ dropZoneActive }">
                 <label for="file-input" class="
                     border-dashed rounded-lg flex flex-col bg-gray-50 border-2 border-gray-300 h-48 w-full justify-center items-center
@@ -160,6 +164,7 @@ export interface Gallery {
 const { $api } = useNuxtApp()
 const config = useRuntimeConfig()
 const files = ref([])
+const folderName = ref(null);
 const loadingFiles = reactive({
     status: false,
     finished: false,
@@ -270,7 +275,7 @@ const getPictures = async () => gallery.value = (await $api.get<Gallery[]>('/api
 watch(() => props.data, (first, newData) => {
 
     reset();
-
+    folderName.value = props.data.folder;
     setTimeout(_ => getPictures().then((response) => {
         loading.value = false;
     }), 500);
@@ -331,24 +336,6 @@ const reset = () => {
     @apply bg-admin-sidebar m-auto mt-7;
     width: 253px;
     padding: 15px;
-}
-
-.file-preview {
-    // max-width: 650px;
-    // margin: auto;
-    // display: flex;
-    // flex-direction: column;
-    // width: 100%;
-    // height: 100%;
-    // background-color: #F2F4F5;
-    // padding: 14px;
-    // box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
-    // border-radius: 11px;
-    // overflow: scroll;
-    // min-height: 361px;
-    // overflow: unset;
-    // overflow-y: scroll;
-    // margin-top: 30px;
 }
 
 li.file-preview_row:not(:last-child) {
