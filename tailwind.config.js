@@ -3,7 +3,6 @@ module.exports = {
   darkMode: "class",
   content: [
     "./node_modules/flowbite/**/*.js",
-
     "components/**/*.vue",
     "layouts/**/*.vue",
     "pages/**/*.vue",
@@ -40,7 +39,6 @@ module.exports = {
       backgroundImage: {
         oceanBackground: 'url("/images/admin/Ocean-Background.jpg")',
         "dive-banner": 'url("/images/front/banner.jpeg")',
-        "gallery-banner": 'url("/images/front/diver-banner.png")',
         footer: 'url("/images/front/footer.png")',
         gallery: 'url("/images/front/banner/gallery.jpeg")',
         admingalleryAddAlbum: 'url("/images/admin/gallery-new-album.jpg")',
@@ -72,7 +70,6 @@ module.exports = {
   },
   plugins: [
     require("flowbite/plugin"),
-
     // plugin(({ addComponents }) => {
     //   const buttons = {
     //     '.btn': {
