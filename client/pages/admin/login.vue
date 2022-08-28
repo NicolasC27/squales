@@ -15,10 +15,6 @@ const loggedIn = async () => {
         if (response.status)
             navigateTo('/admin/dashboard');
     });
-
-
-
-
 }
 
 </script>

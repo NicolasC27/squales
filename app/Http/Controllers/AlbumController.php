@@ -27,9 +27,6 @@ class AlbumController extends Controller
 
     public function view(Request $request, int|string $params)
     {
-
-        // $role = $request->user()->role();
-        // $user = $request->user();
         $default_picture = Album::with(['pictures' => function ($q) {
             $q->where('default_album', '=', '1');
         }])->where('folder', $params)
@@ -39,9 +36,6 @@ class AlbumController extends Controller
             $q->where('default_album', '=', '0');
         }])->where('folder', $params)
             ->orWhere('id', $params)->first();
-
-
-        // $default_picture = $album->pictures->where('default_album', 1);
 
         return response()->json(["data" => ["album" => $album->toArray(), "default_picture" => $default_picture->pictures?->first()?->toArray()], "success" => true, "type" => "success"]);
     }

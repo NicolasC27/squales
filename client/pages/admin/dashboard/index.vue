@@ -20,41 +20,43 @@ definePageMeta({
 /*
 ** Define variable
 */
-const { $api } = useNuxtApp()
-const galleries = ref<Gallery[]>()
-const emit = defineEmits(["data"]);
+const { $api }          = useNuxtApp()
+const emit              = defineEmits(["data"]);
 
-const showModal = ref(false)
-const showModalCreate = ref(false)
-const data = ref(undefined)
-const target = ref(null)
-const targetAlbum = ref(null)
+const galleries         = ref<Gallery[]>()
+const data              = ref(undefined)
+const showModal         = ref(false)
+const showModalCreate   = ref(false)
+const target            = ref(null)
+const targetAlbum       = ref(null)
 
-const obj = reactive({ albumcreated: false })
+const obj               = reactive({ albumcreated: false })
 
-watch(
-    () => obj.albumcreated,
-    (albumcreated) => {
-        showModalCreate.value = false;
-    }
+/*
+** END DEFINE VARAIBLE
+*/
+
+watch(  ()              => obj.albumcreated, 
+        (albumcreated)  => { showModalCreate.value = false; }
 )
 
-const getGallery = async () => galleries.value = (await $api.get<Gallery[]>('/api/admin/gallery')).data
+const   getGallery  = async () => galleries.value
+                    = (await $api.get<Gallery[]>('/api/admin/gallery')).data
 
 
 /*
 ** Define function
 */
-function openModal(gallery): void {
+function    openModal(gallery): void {
     this.data = gallery;
     showModal.value = !showModal.value;
 }
 
-function openModalCreateAlbum(): void {
+function    openModalCreateAlbum(): void {
     showModalCreate.value = !showModalCreate.value;
 }
 
-function checkCreation(check): void {
+function    checkCreation(check): void {
     obj.albumcreated = check;
     if (obj.albumcreated)
         getGallery();
@@ -110,6 +112,7 @@ getGallery();
         <AlbumModal
             class="bg-admin-white h-full border-l-[7px] border-yellow-400 rounded-tr-3xl rounded-br-3xl p-8  w-[42%] slidein absolute overflow-auto "
             @albumcreated="checkCreation" v-show="showModalCreate" ref="targetAlbum"></AlbumModal>
+
     </div>
 </template>
 <style scoped>
