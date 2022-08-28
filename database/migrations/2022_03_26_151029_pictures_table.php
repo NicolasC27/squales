@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('pictures', function (Blueprint $table) {
           $table->id();
+          $table->boolean('default_album')->default(false);
+          $table->boolean('top')->default(false);
           $table->string('name');
           $table->string('path');
-
+          $table->boolean('crop')->default(false);
 
           //define foreign key
           $table->foreignId('album_id')
