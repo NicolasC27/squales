@@ -64,29 +64,29 @@ function shortFileName(file) {
 }
 </script>
 <style lang="scss">
-li {
-    display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    background-color: white;
-    width: 100%;
-    height: auto;
+// li {
+//     display: flex;
+//     flex-direction: row;
+//     list-style-type: none;
+//     background-color: white;
+//     width: 100%;
+//     height: auto;
 
-    img {
-        width: 38px;
-        height: 50px;
-        object-fit: cover;
-    }
+//     img {
+//         width: 38px;
+//         height: 50px;
+//         object-fit: cover;
+//     }
 
-    p {
-        flex-grow: 2;
-        padding-left: 25px;
-        line-height: 50px;
-        font-weight: bold;
-    }
+//     p {
+//         flex-grow: 2;
+//         padding-left: 25px;
+//         line-height: 50px;
+//         font-weight: bold;
+//     }
 
-    button {
-        flex-grow: 1;
-    }
-}
+//     button {
+//         flex-grow: 1;
+//     }
+// }
 </style>
