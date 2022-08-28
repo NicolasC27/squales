@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::get('/linkstorage', function () {
 
 Route::post('/tokens/create', function (Request $request) {
     $token = $request->user()->createToken($request->token_name);
- 
+
     return ['token' => $token->plainTextToken];
 });
+
+Route::get('/admin/crop/{folder}/{filename}', [FileController::class, 'showCrop']);
+Route::get('/admin/crop/original/{folder}/{filename}', [FileController::class, 'showOriginal']);
