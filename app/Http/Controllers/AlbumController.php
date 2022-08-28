@@ -11,12 +11,12 @@ class AlbumController extends Controller
 
     public function __construct()
     {
-        $response = $this->middleware('can:view, ' . Album::class)->only('view');
-        if ($response) {
-            // The action is authorized...
-        } else {
-            echo $response->message();
-        }
+        // $response = $this->middleware('can:view, ' . Album::class)->only('view');
+        // if ($response) {
+        //     // The action is authorized...
+        // } else {
+        //     echo $response->message();
+        // }
     }
 
     public function show()
@@ -28,13 +28,21 @@ class AlbumController extends Controller
     public function view(Request $request, int|string $params)
     {
 
-        $role = $request->user()->role();
-        $user = $request->user();
-        $album = Album::all();
+        // $role = $request->user()->role();
+        // $user = $request->user();
+        $default_picture = Album::with(['pictures' => function ($q) {
+            $q->where('default_album', '=', '1');
+        }])->where('folder', $params)
+            ->orWhere('id', $params)->first();
 
-        $gallery = Album::where('folder', $params)->orWhere('id', $params)->first()->pictures->toArray();
+        $album = Album::with(['pictures' => function ($q) {
+            $q->where('default_album', '=', '0');
+        }])->where('folder', $params)
+            ->orWhere('id', $params)->first();
 
 
-        return response()->json(["data" => $gallery, "success" => true, "type" => "success"]);
+        // $default_picture = $album->pictures->where('default_album', 1);
+
+        return response()->json(["data" => ["album" => $album->toArray(), "default_picture" => $default_picture->pictures?->first()?->toArray()], "success" => true, "type" => "success"]);
     }
 }

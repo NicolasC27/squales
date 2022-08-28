@@ -38,7 +38,6 @@ class AdminGalleryController extends Controller
 
     public function getPictures(Request $request, int|string $params)
     {
-
         $role = $request->user()->role();
         $user = $request->user();
 
@@ -54,6 +53,36 @@ class AdminGalleryController extends Controller
     }
 
 
+    public function cropPictures(Request $request)
+    {
+
+        $picture = Picture::where('album_id', $request->folder_id)->where('default_album', 1)->first();
+
+        $img = Image::make(storage_path('app/public/' . $picture->path));
+
+        $img->crop(
+            $request->coordinates['width'],
+            $request->coordinates['height'],
+            $request->coordinates['left'],
+            $request->coordinates['top']
+        );
+
+        $img->resize(600, 500, function ($const) {
+            $const->aspectRatio();
+        });
+
+
+        Storage::put('public/crop/' . $picture->path, (string) $img->encode('jpg', 100));
+
+
+        $picture = Picture::where('album_id', $request->folder_id)->where('default_album', 1)->update(['crop' => 1]);
+        return response()->json([
+            'status' => true,
+            'type' => 'success',
+            'width' => $request->coordinates['width']
+        ]);
+    }
+
     public function uploadPictures(Request $request)
     {
 
@@ -61,13 +90,18 @@ class AdminGalleryController extends Controller
         $content = file_get_contents($request->file->path());
 
 
-
-        $newPath = $request->file->store($request->folder, 'public');
-        $img = Image::make($request->file->path());
-
         /*
         * Store size before resize of the picture
         */
+        $newPath = $request->file->store($request->folder, 'public');
+        $img_default = Image::make($request->file->path());
+
+        /*
+        * Start resizing picture
+        */
+        $img = Image::make($request->file->path());
+
+
         $fullWidth = $img->width();
         $fullHeight = $img->height();
 
@@ -75,29 +109,64 @@ class AdminGalleryController extends Controller
             $const->aspectRatio();
         });
 
+        $img_default->resize(2048, 1080, function ($const) {
+            $const->aspectRatio();
+        });
         /*
         * Store resize into thumbnail and orignal picture
         */
-        $path = $request->file->hashName('thumbnail/' . $request->folder);
-        Storage::put('public/' . $path, (string) $img->encode('jpg', 75));
+        // $path = $request->file->hashName('thumbnail/' . $request->folder);
+
+        if ($request->default === "true") {
+            $path = $request->file->hashName('crop/' . $request->folder);
+            $pathOriginal = $request->file->hashName($request->folder);
+            Storage::put('public/' . $path, (string) $img->encode('jpg', 75));
+
+            if (strlen((string)$img_default->encode('jpg', 75)) > 75000) {
+                Storage::put('public/' . $pathOriginal, (string) $img_default->encode('jpg', 50));
+            } else {
+                Storage::put('public/' . $pathOriginal, (string) $img_default->encode('jpg', 75));
+            }
+        } else {
+            $path = $request->file->hashName('thumbnail/' . $request->folder);
+
+            Storage::put('public/' . $path, (string) $img->encode('jpg', 75));
+        }
 
 
-        $picture = new Picture;
-        $picture->name = $request->file->getClientOriginalName();
-        $picture->path = $newPath;
-        $picture->width = $fullWidth;
-        $picture->height =  $fullHeight;
-        $picture->album_id = '0';
 
+        $picture = [
+            'name' =>  $request->file->getClientOriginalName(),
+            'path' => $newPath,
+            'width' => $fullWidth,
+            'height' => $fullHeight,
+            'album_id' => '0',
+            'default_album' => ($request->default === "true") ? '1' : '0',
+            'album_id' => $request->folder_id,
+        ];
 
         $album = Album::find($request->folder_id);
-        $album->pictures()->save($picture);
+
+        if ($request->default === "true") {
+
+            $album->pictures()->updateOrInsert(
+                ['default_album' => '1'],
+                $picture
+            );
+        } else {
+            // return response()->json(['status' => false]);
+            $album->pictures()->insert($picture);
+        }
+
+
         return response()->json([
             'status' => true,
             'type' => 'success',
-            'picture' => $album
+            'picture' => $album,
+            'default' => 'public/' . $path,
         ]);
     }
+
 
     public function deletePicture(Request $request)
     {
