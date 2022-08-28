@@ -4,39 +4,42 @@ export interface Album {
   name: string;
   folder: string;
 }
+
 definePageMeta({
   layout: "default",
+
 });
 
+/*
+** Define variable
+*/
 const { $api } = useNuxtApp();
-const album = ref<Album[]>();
+const albums = ref<Album[]>();
 
-async () => (album.value = (await $api.get<Album[]>("/api/album")).data);
+onMounted(async () => (albums.value = (await $api.get<Album[]>("/api/album")).data));
 
-
+/**
+* Function
+ */
 
 </script>
 
 <template>
-  <div class="w-full m-auto">
-    <div class="banner-gallery flex h-96 bg-center bg-dive-banner bg-cover bg-no-repeat">
+  <div class="flex flex-col">
+    <div class="bg-center bg-dive-banner bg-cover bg-no-repeat h-96 w-full banner-gallery">
       <h1>Album</h1>
     </div>
     <div class="h-48"></div>
-    <div class="flex w-[1280px] m-auto">
-      <div class="h-full m-auto" v-for="(album, index) in album" :key="index">
-        <NuxtLink :to="'/album/' + album.folder">
-          <img src="/images/front/normandie_epave.png" class="rounded-2xl" />
-          <div class="">
-            <span class="absolute left-6 top-3.5 text-2xl font-medium tracking-wide">{{
-                album.name
-            }}</span>
-          </div>
-        </NuxtLink>
+    <div class="m-auto w-[1280px]">
+      <div class="flex flex-wrap flex-row justify-start">
+        <div class="h-full w-full p-2 basis-1/4" v-for="(album, index) in albums" :key="index">
+          <NuxtLink :to="'/album/' + album.folder">
+            <img class="rounded-2xl" src="/images/front/normandie_epave.png" />
+          </NuxtLink>
+        </div>
       </div>
     </div>
   </div>
 </template>
-<script></script>
 <style>
 </style>
