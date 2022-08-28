@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="my-gallery flex flex-wrap mt-12 pl-32 pr-32" itemscope>
+        <div class="flex flex-wrap my-gallery mt-12 pr-32 pl-32" itemscope>
             <figure v-for="(item, index) in items" v-show="index === 0 || !singleThumbnail" :key="index"
                 class="gallery-thumbnail" itemprop="associatedMedia" itemscope :src="item.src">
                 <a v-show="nbThumbnailsDisplayed === -1 || index < nbThumbnailsDisplayed" :href="item.src"
@@ -19,7 +19,6 @@ import PhotoSwipeComponent from 'vue3-picture-swipe';
 import RenderHtml from 'vue3-picture-swipe';
 
 
-console.log(PhotoSwipeComponent);
 const props = defineProps({
     items: { type: Array, required: true, default: [] }
 })
