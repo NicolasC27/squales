@@ -21,7 +21,11 @@ class AlbumController extends Controller
 
     public function show()
     {
-        $album = Album::all()->toArray();
+        $album = Album::with(['pictures' => function($q) {
+            $q->where('default_album', '=', '1');
+        }])->get()->toArray();
+
+
         return response()->json(["data" => $album, "success" => true, "type" => 'success']);
     }
 
@@ -38,5 +42,12 @@ class AlbumController extends Controller
             ->orWhere('id', $params)->first();
 
         return response()->json(["data" => ["album" => $album->toArray(), "default_picture" => $default_picture->pictures?->first()?->toArray()], "success" => true, "type" => "success"]);
+    }
+
+    public function updateDescription(Request $request, Album $id)
+    {
+       $id->updateOrFail(['desc' =>  $request->desc]);
+
+        return response()->json(["success" => true]);
     }
 }

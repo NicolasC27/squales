@@ -42,3 +42,6 @@ Route::get('/user', [UserController::class, 'getUserDiver']);
 Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
 Route::get('/auth/token', [AuthController::class, 'auth'])->middleware('auth:sanctum');
+
+
+Route::post('/album/desc/{id}', [AlbumController::class, 'updateDescription']);

@@ -20,9 +20,12 @@ class AdminGalleryController extends Controller
 {
     public function show()
     {
-        $gallery = Album::all();
+        $album = Album::with(['pictures' => function ($q) {
+            $q->where('default_album', '=', '1');
+        }])->get()->toArray();
 
-        return response()->json(["data" => $gallery, "success" => false, "type" => 'success']);
+
+        return response()->json(["data" => $album, "success" => true, "type" => 'success']);
     }
 
     public function createAlbum(Request $request)

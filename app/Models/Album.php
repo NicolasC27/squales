@@ -11,7 +11,8 @@ class Album extends Model
 
     protected $fillable = [
         'name',
-        'folder'
+        'folder',
+        'desc'
     ];
 
     public function pictures()

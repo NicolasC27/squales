@@ -22,6 +22,10 @@ onMounted(async () => (albums.value = (await $api.get<Album[]>("/api/album")).da
 * Function
  */
 
+
+
+
+
 </script>
 
 <template>
@@ -34,7 +38,8 @@ onMounted(async () => (albums.value = (await $api.get<Album[]>("/api/album")).da
       <div class="flex flex-wrap flex-row justify-start">
         <div class="h-full w-full p-2 basis-1/4" v-for="(album, index) in albums" :key="index">
           <NuxtLink :to="'/album/' + album.folder">
-            <img class="rounded-2xl" src="/images/front/normandie_epave.png" />
+            <img v-if="album.pictures?.length === 0" class="rounded-2xl" src="/images/front/normandie_epave.png" />
+            <img v-else="album.pictures?.length > 0" class="rounded-2xl" :src="album.pictures[0]?.crop_url" />
           </NuxtLink>
         </div>
       </div>
