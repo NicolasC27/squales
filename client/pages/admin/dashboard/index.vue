@@ -97,11 +97,15 @@ getGallery();
             <div class="m-auto bg-yellow-300 rounded-2xl h-1 w-3/4"></div>
         </div>
         <div class="flex flex-row flex-wrap m-auto w-4/5 gallery justify-center overflow-auto">
-            <div v-for="(gallery, index) in galleries" :key="index" class="p-3">
-                <div class="bg-admingalleryExample bg-cover rounded-2xl h-56 w-[460px] relative ">
-                    <button @click="openModal(gallery)"
+            <div v-for="(album, index) in galleries" :key="index" class="p-3">
+                <div class="bg-cover rounded-2xl h-56 w-[460px] relative ">
+                    <img v-if="album.pictures.length <= 0 " class="rounded-2xl"
+                        src="/images/front/normandie_epave.png" />
+                    <img v-else class="rounded-2xl" :src="album.pictures[0]?.crop_url" />
+
+                    <button @click="openModal(album)"
                         class="bg-admin-white rounded-lg h-11 right-6 bottom-6 w-44 absolute ">
-                        <p class="font-medium">{{ gallery.name }}</p>
+                        <p class="font-medium">{{ album.name }}</p>
                     </button>
                 </div>
             </div>
