@@ -6,7 +6,7 @@
     </div>
 </template>
 <script setup>
-// import get from "lodash/get";
+import get from "lodash/get";
 
 const props = defineProps({
     column: { type: Object, default: () => ({}) },
@@ -14,8 +14,10 @@ const props = defineProps({
 })
 
 const value = computed(() => {
-    // return get(props.row, props.column.prop);
+    return get(props.row, props.column.prop);
 });
 
+console.log("bonjour");
+console.log(props.column.prop);
 </script>
 

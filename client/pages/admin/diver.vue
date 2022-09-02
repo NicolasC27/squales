@@ -58,7 +58,7 @@ function swipeModal(value) {
     if (showModal.value != true) {
         console.log(value);
         dataModal.value = value.row;
-        showModal.value = value.showModal;
+        showModal.value = !showModal.value;
     }
 }
 
@@ -71,33 +71,29 @@ function urlData() {
 
 </script>
 <template>
-    <div class="pl-32 h-full relative overflow-auto">
+    <div class="flex flex-col h-[90vh] w-full relative">
         <div>
             <DataTable :columns="columns" @show-modal="swipeModal" actions="view,edit,delete,search,refresh"
                 title="Users from API" url="/api/user">
                 <!-- Each column has an available slot via the prop attribute. You can always tap into it to fully customize the cells with your own content -->
                 <!-- <template v-slot:customSlot="{row}">
-      <BaseButton variant="white" @click="actionClick(row)">Action</BaseButton> 
-    </template> -->
+                <BaseButton variant="white" @click="actionClick(row)">Action</BaseButton> 
+                </template> -->
 
             </DataTable>
         </div>
         <ModalRight
-            class="slidein bg-admin-white h-[85vh] rounded-tr-3xl rounded-br-3xl p-8 w-2/5 absolute overflow-auto border-l-[5px] border-[#FFD600]"
-            v-if="dataModal" v-show="showModal" ref="target" :data="dataModal" @target="addTarget"></ModalRight>
-
+            class="bg-admin-white h-full border-l-[7px] border-yellow-300 rounded-tr-3xl rounded-br-3xl p-8 w-[42%] slidein absolute overflow-auto "
+             v-show="showModal" ref="target" :data="dataModal" @target="addTarget"></ModalRight>
     </div>
 </template>
 <style scoped>
 /*
 for modal right
 */
-body {
-    overflow: hidden;
-}
-
 .slidein {
-    @apply top-12 fixed z-10 right-0 mr-12;
+    right: 0;
+    top: 0;
 }
 
 .slidein::-webkit-scrollbar {
@@ -120,6 +116,10 @@ body {
     width: 0;
     height: 0;
     display: none;
+}
+
+.slidein::-webkit-scrollbar-corner {
+    background-color: transparent;
 }
 
 .slidein::-webkit-scrollbar-corner {

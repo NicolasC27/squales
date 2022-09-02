@@ -21,8 +21,9 @@ const props = defineProps({
 
 <template>
     <Transition name="slide">
-        <div>
-            <form>
+        <div v-if="data" class="flex flex-col">
+
+            <div>
                 <div class="mb-6">
                     <label for="default-input"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nom</label>
@@ -66,7 +67,7 @@ const props = defineProps({
                     <option value="3">Niveau 3</option>
                     <option value="4">Niveau 4</option>
                 </select>
-            </form>
+            </div>
         </div>
     </Transition>
 </template>
@@ -153,16 +154,16 @@ li.file-preview_row:not(:last-child) {
 
 .slide-leave-active {
     transition: all 0.4s ease-in-out;
-
 }
 
 .slide-enter-from {
-    transform: translateX(120%);
+    transform: translateX(100%);
 
 }
 
 .slide-leave-to {
-    transform: translateX(120%);
+    transform: translateX(100%);
+
 }
 
 .card {

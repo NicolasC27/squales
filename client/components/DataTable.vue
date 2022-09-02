@@ -17,6 +17,8 @@ import { Grape, IceCream, IceDrink, ArrowDown } from "@element-plus/icons-vue";
 import { ID_INJECTION_KEY } from 'element-plus'
 import GenderBadge from "./cells/GenderBadge.vue";
 import BaseButton from "./BaseButton.vue";
+import get from "lodash/get";
+
 // import cloneDeep from "lodash/cloneDeep";
 
 provide(ID_INJECTION_KEY, {
@@ -105,7 +107,7 @@ refresh();
 
 </script>
 <template>
-    <div class="min-h-[85vh] w-full bg-gray-200 p-10">
+    <div class="min-h-[90vh] w-full bg-gray-200 p-10">
         <div class="data-table">
             <BaseTable :data="data" :local-sort="url === ''" :loading="loading" v-bind="$attrs">
 
@@ -117,7 +119,7 @@ refresh();
                                 </component>
                             </template>
                             <div v-else class="truncate">
-                                <!-- {{ get(row, column.prop) || '- -' }} -->
+                                {{ get(row, column.prop) || '- -' }} 
                             </div>
                         </slot>
                     </template>
@@ -135,7 +137,7 @@ refresh();
             </BaseTable>
 
 
-            <div class="w-full flex justify-end mt-4 table-pagination">
+            <!-- <div class="w-full flex justify-end mt-4 table-pagination">
                 <el-pagination v-show="data.length > 0 && url" @size-change="perPageChange"
                     @current-change="handleCurrentChange" :currentPage="pagination.current_page"
                     :page-sizes="perPageOptions" :page-size="pagination.per_page" :pager-count="5"
@@ -145,7 +147,7 @@ refresh();
                             :value="value"></el-option>
                     </el-select>
                 </el-pagination>
-            </div>
+            </div> -->
         </div>
     </div>
 

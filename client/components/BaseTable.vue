@@ -38,7 +38,6 @@
 // import { get } from "lodash";
 import { vLoading } from "element-plus";
 
-
 const props = defineProps({
     data: { type: Array, default: [] },
     rowKey: {
@@ -47,7 +46,6 @@ const props = defineProps({
     },
     loading: { type: Boolean, default: true }
 })
-
 
 const columns = ref([]);
 const scope = ref([]);
@@ -62,7 +60,6 @@ function addColumn(step) {
     columns.value.splice(index, 0, step);
 
 };
-
 
 function addScope(step) {
     const index = scope.value.length;
@@ -80,13 +77,14 @@ const removeColumn = function (step) {
 
 
 const ColumnRenderer = (props) => {
-    console.log(props.row);
+
     const renderedScopedSlot = props.column.default({
         row: props.row,
         index: props.index
     });
     return h("div", { attrs: { class: "cell" } }, [renderedScopedSlot]);
 }
+
 const ColumnHeaderRenderer = (props) => {
     return h('div', props.column.label);
 }
