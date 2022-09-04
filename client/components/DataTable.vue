@@ -107,8 +107,7 @@ refresh();
 
 </script>
 <template>
-    <div class="min-h-[90vh] w-full bg-gray-200 p-10">
-        <div class="data-table">
+        <div class="data-table w-full p-10">
             <BaseTable :data="data" :local-sort="url === ''" :loading="loading" v-bind="$attrs">
 
                 <BaseTableColumn v-for="(column, index) in columns" :key="column.prop || index" v-bind="column">
@@ -119,7 +118,7 @@ refresh();
                                 </component>
                             </template>
                             <div v-else class="truncate">
-                                {{ get(row, column.prop) || '- -' }} 
+                                {{ get(row, column.prop) || '- -' }}
                             </div>
                         </slot>
                     </template>
@@ -149,6 +148,5 @@ refresh();
                 </el-pagination>
             </div> -->
         </div>
-    </div>
 
 </template>

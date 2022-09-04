@@ -43,16 +43,16 @@ function preventDefault(e) {
 
 const events = ['dragenter', 'dragover', 'dragleave', 'drop']
 
-onMounted(() => {
-    events.forEach((eventName) => {
-        document.body.addEventListener(eventName, preventDefault)
-    })
-})
+// onMounted(() => {
+//     events.forEach((eventName) => {
+//         document.body.addEventListener(eventName, preventDefault)
+//     })
+// })
 
-onUnmounted(() => {
-    events.forEach((eventName) => {
-        document.body.removeEventListener(eventName, preventDefaults)
-    })
-})
+// onUnmounted(() => {
+//     events.forEach((eventName) => {
+//         document.body.removeEventListener(eventName, preventDefaults)
+//     })
+// })
 
 </script>
