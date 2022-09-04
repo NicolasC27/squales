@@ -2,7 +2,7 @@
 import EmailLinkVue from '~~/client/components/cells/EmailLink.vue';
 import GenderBadgeVue from '~~/client/components/cells/GenderBadge.vue';
 import { OnClickOutside, vOnClickOutside } from '@vueuse/components'
-import ModalRight from '~~/client/components/ModalRight.vue';
+import Diver from '~~/client/components/modals/diver.vue';
 
 const config = useRuntimeConfig()
 
@@ -65,7 +65,7 @@ function swipeModal(value) {
         console.log(value);
         dataModal.value = value.row;
         component.show = !component.show;
-        component.name = ModalRight;
+        component.name = Diver;
     }
 }
 
