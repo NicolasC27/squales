@@ -2,6 +2,8 @@
 import EmailLinkVue from '~~/client/components/cells/EmailLink.vue';
 import GenderBadgeVue from '~~/client/components/cells/GenderBadge.vue';
 import { OnClickOutside, vOnClickOutside } from '@vueuse/components'
+import ModalRight from '~~/client/components/ModalRight.vue';
+
 const config = useRuntimeConfig()
 
 definePageMeta({
@@ -45,33 +47,41 @@ const columns = ref([
     }
 ]);
 
+/*
+** Declaration
+*/
 const row = ref();
 const dataModal = ref(null);
+const component = reactive({
+    name: null,
+    show: false,
+}); 
 
-onClickOutside(target, (event) => {
-
-    showModal.value = false;
-
-});
-
+/*
+** Function
+*/
 function swipeModal(value) {
-    if (showModal.value != true) {
+    if (component.show != true) {
         console.log(value);
         dataModal.value = value.row;
-        showModal.value = !showModal.value;
+        component.show = !component.show;
+        component.name = ModalRight;
     }
 }
 
-function addTarget(value) {
-    target.value = value;
-}
 function urlData() {
     return config.apiURL + 'api/user';
 }
 
 </script>
 <template>
-    <div class="flex flex-col h-[90vh] w-full relative">
+    <div class="flex flex-col h-[90vh] w-full relative p-10">
+        <div class="">
+            <button type="button"
+                class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                Inscrire un membre
+            </button>
+        </div>
         <div>
             <DataTable :columns="columns" @show-modal="swipeModal" actions="view,edit,delete,search,refresh"
                 title="Users from API" url="/api/user">
@@ -82,9 +92,8 @@ function urlData() {
 
             </DataTable>
         </div>
-        <ModalRight
-            class="bg-admin-white h-full border-l-[7px] border-yellow-300 rounded-tr-3xl rounded-br-3xl p-8 w-[42%] slidein absolute overflow-auto "
-             v-show="showModal" ref="target" :data="dataModal" @target="addTarget"></ModalRight>
+        <Modal :data="dataModal" v-model:component="component">
+        </Modal>
     </div>
 </template>
 <style scoped>
