@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminGalleryController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserDiverController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,10 @@ Route::get('/album', [AlbumController::class, 'show']);
 
 
 /**
- * Admin gallery
+ * Admin
  */
+
+ /* gallery */
 Route::get('/admin/gallery', [AdminGalleryController::class, 'show']);
 Route::get('/admin/gallery/album/{id}', [AlbumController::class, 'view']);
 Route::post('/admin/gallery/upload/', [AdminGalleryController::class, 'uploadPictures'])->withoutMiddleware('api');
@@ -31,11 +34,13 @@ Route::post('/admin/gallery/upload/crop', [AdminGalleryController::class, 'cropP
 Route::post('/admin/gallery/create/', [AdminGalleryController::class, 'createAlbum']);
 Route::delete('/admin/gallery/picture/{id}', [AdminGalleryController::class, 'deletePicture'])->middleware('auth:sanctum');
 
+/* user diver */
+Route::post('/admin/userdiver/update/{user}', [UserDiverController::class, 'update']);
+
 /**
  * User
  */
 Route::get('/user', [UserController::class, 'getUserDiver']);
-
 /**
  * Auth
  */
