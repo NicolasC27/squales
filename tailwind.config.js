@@ -1,6 +1,10 @@
 /** @type {import('tailwindcss').Config} */
+const path = require('path');
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   darkMode: "class",
+
   content: [
     "./node_modules/flowbite/**/*.js",
 
@@ -9,6 +13,7 @@ module.exports = {
     "pages/**/*.vue",
     "plugins/**/*.js",
     "content/**/*.md",
+    path.resolve(__dirname, "./node_modules/litepie-datepicker/**/*.js"),
   ],
   theme: {
     boxShadow: {
@@ -53,6 +58,11 @@ module.exports = {
         deleteMode:
           "url(\"data:image/svg+xml;charset=UTF-8,%3csvg width='32' height='32' fill='none' stroke='white' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'%3e%3c/path%3e%3c/svg%3e\"), pointer",
       },
+      colors: {
+        // Change with you want it
+        "litepie-primary": colors.sky, // color system for light mode
+        "litepie-secondary": colors.gray, // color system for dark mode
+      },
     },
 
     textColor: (theme) => ({
@@ -69,6 +79,13 @@ module.exports = {
       xl: "1280px",
       "2xl": "1536px",
     },
+  },
+  variants: {
+    extend: {
+      cursor: ['disabled'],
+      textOpacity: ['disabled'],
+      textColor: ['disabled']
+    }
   },
   plugins: [
     require("flowbite/plugin"),
