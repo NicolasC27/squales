@@ -44,15 +44,16 @@
             </div>
 
             <div class="xl:pl-20">
-                <div class="h-40 lg:h-20 w-full flex flex-wrap">
+                <div class="w-full flex flex-wrap">
                     <nav id="header1" class="bg-white-100 w-auto flex-1 border-gray-300 order-1 lg:order-2">
                         <div class="flex h-full justify-between items-center">
                             <!--Search-->
                             <div class="relative w-full px-6">
                                 <nav>
-                                    <ul class="flex flex-row text-center text-lg font-medium text-default">
-                                        <li></li>
+                                    <ul role="list" class="flex flex-row text-center [&>li>a]:text-base [&>li>a]:leading-[4rem] text-default">
+                                        <li>
                                         <a class="pr-8">LE CLUB</a>
+                                        </li>
                                         <li>
                                             <a class="p-6">FORMATION</a>
                                         </li>

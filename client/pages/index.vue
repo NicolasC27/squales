@@ -97,10 +97,10 @@
     </section>
   </div>
 </template>
-<script >
+<script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
-import { FreeMode } from "swiper";
+import { FreeMode } from "swiper"
 
 // Import Swiper styles
 import 'swiper/css';
