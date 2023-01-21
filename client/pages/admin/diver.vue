@@ -3,6 +3,8 @@ import EmailLinkVue from '~~/client/components/cells/EmailLink.vue';
 import GenderBadgeVue from '~~/client/components/cells/GenderBadge.vue';
 import { OnClickOutside, vOnClickOutside } from '@vueuse/components'
 import Diver from '~~/client/components/modals/diver.vue';
+import RegisterVue from '~~/client/components/modals/Register.vue';
+import levelInstructions from '~~/client/components/cells/levelInstructions.vue';
 
 const config = useRuntimeConfig()
 
@@ -42,6 +44,7 @@ const columns = ref([
     {
         label: "Enseignent",
         prop: "diver.level_instruction",
+        component: levelInstructions,
         maxWidth: 80,
         sortable: true
     }
@@ -65,7 +68,7 @@ function swipeModal(value) {
         console.log(value);
         dataModal.value = value.row;
         component.show = !component.show;
-        component.name = Diver;
+        component.name = value.component;
     }
 }
 
@@ -78,12 +81,12 @@ function urlData() {
     <div class="flex flex-col h-[90vh] w-full relative p-10">
         <div class="">
             <button type="button"
-                class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" @click="swipeModal({component: RegisterVue})">
                 Inscrire un membre
             </button>
         </div>
         <div>
-            <DataTable :columns="columns" @show-modal="swipeModal" actions="view,edit,delete,search,refresh"
+            <DataTable :columns="columns" @show-modal="swipeModal" actions="view,edit,delete,search,refresh"    
                 title="Users from API" url="/api/user">
                 <!-- Each column has an available slot via the prop attribute. You can always tap into it to fully customize the cells with your own content -->
                 <!-- <template v-slot:customSlot="{row}">

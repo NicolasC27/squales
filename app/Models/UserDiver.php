@@ -12,7 +12,9 @@ class UserDiver extends Model
     protected $table = 'user_diver';
 
     protected $fillable = [
-        'level',
+        'level_diver',
+        'level_apnea',
+        'level_instruction',
         'user_id',
     ];
 
