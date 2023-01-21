@@ -71,6 +71,17 @@ export default class Api {
     }
   }
 
+  public async update<Result>(
+    endpoint: string,
+    params?: SearchParams
+  ): Promise<api.MetApiResponse> {
+    try {
+      return await $fetch(endpoint, this.fetchOptions(params, "POST"));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   public async delete<Result>(
     endpoint: string,
     params?: SearchParams
