@@ -22,6 +22,15 @@ export const authStore = defineStore("auth", {
         });
     },
 
+    async proceedRegister(credentials)
+    {
+      return await this.$nuxt.$api
+        .store("/api/auth/register", credentials)
+        .then((response) => {
+          return response;
+        });
+    },
+
     authToken(token = null) {
       return this.$nuxt.$api.get("/api/auth/token").then((response) => {
         console.log(response);
@@ -32,6 +41,7 @@ export const authStore = defineStore("auth", {
       });
     },
 
+    
     signOut() {
       this.setUser(null);
       this.setAuthenticated(false);
