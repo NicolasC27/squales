@@ -18,6 +18,7 @@ import { ID_INJECTION_KEY } from 'element-plus'
 import GenderBadge from "./cells/GenderBadge.vue";
 import BaseButton from "./BaseButton.vue";
 import get from "lodash/get";
+import editDiverVue from "./modals/editDiver.vue";
 
 // import cloneDeep from "lodash/cloneDeep";
 
@@ -127,7 +128,7 @@ refresh();
                 <BaseTableColumn align="left" v-slot="{ row, index }">
                     <BaseButton size="sm" variant="gray-link" @click="$emit('view', row, index)">View</BaseButton>
                     <BaseButton v-if="showAction('edit')" variant="primary-link" size="sm"
-                        @click="$emit('showModal', { showModal: true, row: row })">
+                        @click="$emit('showModal', { showModal: true, row: row, component: editDiverVue })">
                         Edit</BaseButton>
                     <!-- <BaseButton v-if="showAction('delete')" variant="danger-link" size="sm"
                         @click="onDelete(row, index)">Delete</BaseButton> -->
