@@ -14,7 +14,6 @@ export interface Gallery {
 */
 definePageMeta({
     layout: 'admin',
-    middleware: 'authenticated',
 })
 
 /*

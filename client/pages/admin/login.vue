@@ -1,5 +1,6 @@
 <script setup>
 import { authStore } from "~/store/auth";
+import Register from "./register.vue";
 
 definePageMeta({
     layout: '',
@@ -33,7 +34,8 @@ const loggedIn = async () => {
                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Connectez-vous à votre compte
                     </h1>
-                    <form class="space-y-4 md:space-y-6" action="#">
+                    <Register></Register>
+                    <!-- <form class="space-y-4 md:space-y-6" action="#">
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ton
                                 email</label>
@@ -74,7 +76,7 @@ const loggedIn = async () => {
                                 class="font-medium text-primary-600 hover:underline dark:text-primary-500">Enregistre-toi
                                 pour faire une demande</a>
                         </p>
-                    </form>
+                    </form> -->
                 </div>
             </div>
         </div>

@@ -22,10 +22,6 @@ onMounted(async () => (albums.value = (await $api.get<Album[]>("/api/album")).da
 * Function
  */
 
-
-
-
-
 </script>
 
 <template>
