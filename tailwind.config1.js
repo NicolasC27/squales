@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
- const path = require('path');
+const path = require('path');
 const colors = require('tailwindcss/colors');
 
 module.exports = {
@@ -14,12 +14,6 @@ module.exports = {
   //   "content/**/*.md",
   //   // path.resolve(__dirname, "./node_modules/litepie-datepicker/**/*.js"),
   // ],
-  mode: 'jit',
-  purge: {
-    content: [
-      path.join(__dirname, 'client/**/*.{vue,js,ts,jsx,tsx}'),
-    ],
-  },
   theme: {
     boxShadow: {
       datatable: "0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%)",
@@ -61,7 +55,7 @@ module.exports = {
       },
       cursor: {
         deleteMode:
-            "url(\"data:image/svg+xml;charset=UTF-8,%3csvg width='32' height='32' fill='none' stroke='white' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'%3e%3c/path%3e%3c/svg%3e\"), pointer",
+          "url(\"data:image/svg+xml;charset=UTF-8,%3csvg width='32' height='32' fill='none' stroke='white' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'%3e%3c/path%3e%3c/svg%3e\"), pointer",
       },
       colors: {
         // Change with you want it
@@ -93,6 +87,7 @@ module.exports = {
     }
   },
   plugins: [
+    require("flowbite"),
 
     // plugin(({ addComponents }) => {
     //   const buttons = {
