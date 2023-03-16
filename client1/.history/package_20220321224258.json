@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "preview": "nuxi preview",
+    "start": "node .output/server/index.mjs"
+  },
+  "devDependencies": {
+    "@nuxt/types": "^2.15.8",
+    "nuxt-windicss": "2.2.8",
+    "@vueuse/components": "^8.1.2",
+    "@vueuse/nuxt": "^7.2.2",
+        "@vueuse/core": "5.2.0",
+    "lazysizes": "^5.3.2",
+    "nuxt3": "3.0.0-27430121.2b3dbed", 
+    "pug": "^3.0.2",
+    "pug-plain-loader": "^1.1.0",
+    "sass": "^1.49.9",
+    "sass-loader": "^10.2.1",
+    "vite-plugin-windicss": "^1.8.3",
+    "windicss": "^3.5.1"
+  },
+  "dependencies": {
+    "@egjs/flicking": "^4.5.0",
+    "@egjs/vue3-flicking": "^4.5.1",
+    "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "nuxi": "^0.10.1",
+    "swiper": "^8.0.6",
+    "vue-property-decorator": "^8.2.1"
+  }
+}

@@ -2,7 +2,6 @@
 
 import { useAsyncState } from "@vueuse/core";
 
-
 export interface Gallery {
   name: string;
   data: Object;

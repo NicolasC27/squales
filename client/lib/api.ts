@@ -1,11 +1,13 @@
+// @ts-ignore
 import { FetchError, FetchOptions, SearchParams } from "ohmyfetch";
 import { IncomingMessage } from "http";
 export interface AuthConfig {
   fetchOptions: FetchOptions;
   req?: IncomingMessage;
-  token: (key, value) => Number | string | null;
+  token: (key: any, value: any) => Number | string | null;
 }
 
+// @ts-ignore
 const authConfigDefaults: AuthConfig = {
   fetchOptions: {},
   req: undefined,
